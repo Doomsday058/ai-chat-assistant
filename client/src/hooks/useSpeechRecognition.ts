@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 
-interface IWindow extends Window {
+export interface IWindow extends Window {
   webkitSpeechRecognition: any;
   SpeechRecognition: any;
 }

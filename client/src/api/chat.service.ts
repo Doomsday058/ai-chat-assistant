@@ -1,5 +1,5 @@
 import { api } from "./axiosInstance";
-import type { Message, ChatResponse } from "../types";
+import type { ChatResponse } from "../types";
 
 export const chatService = {
   async sendMessage(message: string): Promise<string> {

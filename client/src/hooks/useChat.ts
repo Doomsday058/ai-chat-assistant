@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Message, ChatResponse } from "../types";
+import type { Message } from "../types";
 import { chatService } from "../api/chat.service";
 
 const generateId = () =>
