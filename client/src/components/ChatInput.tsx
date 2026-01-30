@@ -9,7 +9,6 @@ interface ChatInputProps {
 
 const ChatInput: React.FC<ChatInputProps> = ({ onSend, disabled }) => {
   const [text, setText] = useState("");
-
   const {
     text: voiceText,
     isListening,
@@ -37,40 +36,43 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSend, disabled }) => {
   };
 
   return (
-    <div className="w-full">
-      <div className="flex items-center gap-2 max-w-4xl mx-auto">
+    <div className="w-full max-w-4xl mx-auto">
+      <div className="relative flex items-center bg-[#1e293b]/60 border border-gray-700 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-lg ring-1 ring-white/10 focus-within:ring-blue-500/50 transition-all">
+        {isSupported && (
+          <button
+            className={`p-2 mr-2 rounded-full transition-colors ${
+              isListening
+                ? "text-red-500 animate-pulse"
+                : "text-gray-400 hover:text-white"
+            }`}
+            onClick={startListening}
+            disabled={disabled || isListening}
+            title="Голосовой ввод"
+          >
+            <MicrophoneIcon className="h-6 w-6" />
+          </button>
+        )}
+
         <input
           type="text"
-          className="flex-1 bg-gray-700 text-white border border-gray-600 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 disabled:opacity-50"
+          className="flex-1 bg-transparent text-white placeholder-gray-400 text-lg focus:outline-none"
           placeholder={isListening ? "Слушаю..." : "Ask whatever you want"}
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={handleKeyDown}
           disabled={disabled || isListening}
         />
-
         <button
           onClick={handleSendClick}
           disabled={!text.trim() || disabled}
-          className="p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:bg-gray-700 disabled:text-gray-500 transition-colors"
+          className={`ml-2 p-3 rounded-xl transition-all ${
+            text.trim() && !disabled
+              ? "bg-blue-600 hover:bg-blue-500 text-white shadow-lg"
+              : "bg-gray-700/50 text-gray-500 cursor-not-allowed"
+          }`}
         >
-          <PaperAirplaneIcon className="h-5 w-5" />
+          <PaperAirplaneIcon className="h-5 w-5 -rotate-45" />{" "}
         </button>
-
-        {isSupported && (
-          <button
-            className={`p-2 rounded-full transition-all duration-200 ${
-              isListening
-                ? "bg-red-500 text-white animate-pulse shadow-lg ring-2 ring-red-300"
-                : "bg-gray-700 text-gray-400 hover:bg-gray-600 hover:text-white"
-            }`}
-            onClick={startListening}
-            disabled={disabled || isListening}
-            title="Нажми и говори"
-          >
-            <MicrophoneIcon className="h-5 w-5" />
-          </button>
-        )}
       </div>
     </div>
   );
