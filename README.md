@@ -57,8 +57,8 @@
 
 ### 1️⃣ Клонирование репозитория
 ```bash
-git clone https://github.com/ВАШ_НИК/repo-name.git
-cd repo-name
+git clone https://github.com/Doomsday058/ai-chat-assistant.git
+cd ai-chat-assistant
 ```
 ### 2️⃣ Настройка бэкенда
 ```bash
